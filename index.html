@@ -18,7 +18,9 @@
     }
   </style>
 </head>
+
 <body>
+  <h1></h1>
   <table>
     <tbody>
       <tr>
@@ -153,6 +155,8 @@
     const clickSound = document.getElementById('click')
     const boomSound = document.getElementById('boom')
     let lastSound = clickSound;
+    let x = document.querySelector('h1')
+    const rows = document.querySelectorAll("table tr")
 
     // TODO: 1 - make it such that if any table cell is clicked, the onClick function below is executed
     const table = document.querySelector('table');
@@ -167,9 +171,11 @@
       clickCount++
       if (clickCount % 3 == 0) {
         // boom
+        x.textContent = "BOOM"
         boomSound.play();
         lastSound = boomSound
       } else {
+        x.textContent = " "
         clickSound.play();
         lastSound = clickSound
       }
@@ -177,6 +183,15 @@
       console.log(`ev in onClick ${ev}`)
       // TODO: 2 - REMOVE THE TABLE CELL THAT WAS CLICKED
       ev.target.remove();
+
+      for (let i = 0; i < rows.length; i++) {
+        const x = rows[i].querySelectorAll("td");
+        if (x.length % 2 === 1) {
+          rows[i].classList.add("odd");
+        } else {
+          rows[i].classList.remove("odd");
+        }
+      }
     }
   </script>
 </body>
